@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import EmployeeService from '../service/EmployeeService'
 
 class ListEmployeeComponent extends Component {
 
@@ -7,6 +8,14 @@ class ListEmployeeComponent extends Component {
         this.state = {
             employees: []
         }
+    }
+
+    // always use this component to make rest api or ajax calls because this method 
+    // will be called immediately after a component is mounted
+    componentDidMount() {
+        EmployeeService.getEmployees().then((res) => {
+            this.setState({ employees: res.data });
+        });
     }
 
     render() {
